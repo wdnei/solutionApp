@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="solutionAppModelStoreContainer" CdmEntityContainer="solutionAppEntities">
+    <EntitySetMapping Name="Veiculo">
+      <EntityTypeMapping TypeName="IsTypeOf(solutionAppModel.Veiculo)">
+        <MappingFragment StoreEntitySet="Veiculo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cor" ColumnName="cor" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="placa" ColumnName="placa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Multa">
+      <EntityTypeMapping TypeName="IsTypeOf(solutionAppModel.Multa)">
+        <MappingFragment StoreEntitySet="Multa">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="pontos" ColumnName="pontos" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MultaVeiculo" TypeName="solutionAppModel.MultaVeiculo" StoreEntitySet="MultaVeiculo">
+      <EndProperty Name="Multa">
+        <ScalarProperty Name="id" ColumnName="Multa_id" />
+      </EndProperty>
+      <EndProperty Name="Veiculo">
+        <ScalarProperty Name="id" ColumnName="MultaVeiculo_Multa_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

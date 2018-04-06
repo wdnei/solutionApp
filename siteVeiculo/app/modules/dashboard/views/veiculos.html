@@ -1,0 +1,85 @@
+﻿
+
+<!--
+Author: Ranjithprabhu K
+Page Description: About Me page
+Date: 05 Jan 2016
+-->
+<section class="content-header">
+    <h1>
+        Veiculos
+    </h1>
+    <ol class="breadcrumb">
+        <li><a><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Veiculos</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div ng-controller="VeiculoController">
+            <!-- Lista veiculos-->
+            <div class="col-md-3">
+                <label for="singleSelect"> Page Size: </label>
+                <select name="singleSelect" ng-model="paginationModel.pageSize" ng-change="listarVeiculosTable(1, paginationModel.pageSize)">
+                    <option ng-value="5">5</option>
+                    <option ng-value="10">10</option>
+                    <option ng-value="20">20</option>
+                    <option ng-value="paginationModel.totalNumberOfRecords">Todos</option>
+                </select><br>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Cor</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="v in paginationModel.results  track by v.id">
+                            <th scope="row">{{v.id}}</th>
+                            <td>{{v.placa}}</td>
+                            <td>{{v.cor}}</td>
+                            <td>{{v.marca}}</td>
+                            <td>{{v.modelo}}</td>
+                            <td><button type="button" class="btn btn-sm btn-primary" ng-click="abrirEdicaoVeiculo(v)">Editar</button></td>
+                            <td><button type="button" class="btn btn-sm btn-danger" ng-click="excluirVeiculo(v)">Excluir</button></td>
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <ul uib-pagination total-items="paginationModel.totalNumberOfRecords" ng-change="listarVeiculosTable(paginationModel.pageNumber, paginationModel.pageSize)" ng-model="paginationModel.pageNumber" max-size="5" items-per-page="paginationModel.pageSize" boundary-links="true" rotate="false"></ul>
+
+            <!--Adicionar novo veiculo-->
+            <form>
+                <h4 class="mb-3">Adicionar Veiculo</h4>
+                <div class="form-group">
+                    <label for="corVeiculo">Cor</label>
+                    <input class="form-control" type="text" name="corVeiculo" ng-model="veiculo.cor" />
+                </div>
+                <div class="form-group">
+                    <label for="modeloVeiculo">Modelo</label>
+                    <input class="form-control" type="text" name="modeloVeiculo" ng-model="veiculo.modelo" />
+                </div>
+                <div class="form-group">
+                    <label for="placaVeiculo">Placa</label>
+                    <input class="form-control" type="text" name="placaVeiculo" ng-model="veiculo.placa" />
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="salvarVeiculo()">Salvar</button>
+
+            </form>
+
+        </div>
+
+    </div><!-- /.row -->
+</section><!-- /.content -->

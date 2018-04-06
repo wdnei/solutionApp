@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VeiculosEntityDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="VeiculosEntityDataModelStoreContainer">
+    <EntitySet Name="VeiculoSet" EntityType="VeiculosEntityDataModel.Store.VeiculoSet" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="VeiculoSet">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="modelo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="placa" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+</Schema>

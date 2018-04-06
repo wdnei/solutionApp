@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Teste Site Angular + C#</title>
+    <!--<link href="Content/bootstrap.min.css" rel="stylesheet" />-->
+    <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+</head>
+<body class="container" ng-app="appModule">
+
+    <div ng-controller="veiculoController">
+        <!-- Lista veiculos-->
+        <div class="col-md-3">
+            <label for="singleSelect"> Page Size: </label>
+            <select name="singleSelect" ng-model="paginationModel.pageSize" ng-change="listarVeiculosTable(1, paginationModel.pageSize)">
+                <option ng-value="5">5</option>
+                <option ng-value="10">10</option>
+                <option ng-value="20">20</option>
+                <option ng-value="paginationModel.totalNumberOfRecords">Todos</option>
+            </select><br>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Placa</th>
+                        <th scope="col">Cor</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Modelo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="v in paginationModel.results  track by v.id">
+                        <th scope="row">{{v.id}}</th>
+                        <td>{{v.placa}}</td>
+                        <td>{{v.cor}}</td>
+                        <td>{{v.marca}}</td>
+                        <td>{{v.modelo}}</td>
+                        <td><button type="button" class="btn btn-sm btn-primary" ng-click="abrirEdicaoVeiculo(v)">Editar</button></td>
+                        <td><button type="button" class="btn btn-sm btn-danger" ng-click="excluirVeiculo(v)">Excluir</button></td>
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        
+        <ul uib-pagination total-items="paginationModel.totalNumberOfRecords" ng-change="listarVeiculosTable(paginationModel.pageNumber, paginationModel.pageSize)" ng-model="paginationModel.pageNumber" max-size="5" items-per-page="paginationModel.pageSize" boundary-links="true" rotate="false"></ul>
+
+        <!--Adicionar novo veiculo-->
+        <form>
+            <h4 class="mb-3">Adicionar Veiculo</h4>
+            <div class="form-group">
+                <label for="corVeiculo">Cor</label>
+                <input class="form-control" type="text" name="corVeiculo" ng-model="veiculo.cor" />
+            </div>
+            <div class="form-group">
+                <label for="modeloVeiculo">Modelo</label>
+                <input class="form-control" type="text" name="modeloVeiculo" ng-model="veiculo.modelo" />
+            </div>
+            <div class="form-group">
+                <label for="placaVeiculo">Placa</label>
+                <input class="form-control" type="text" name="placaVeiculo" ng-model="veiculo.placa" />
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="salvarVeiculo()">Salvar</button>
+
+        </form>
+
+    </div>
+
+    <script src="scripts/jquery-3.0.0.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="scripts/angular-resource.min.js"></script>
+    <script src="scripts/angular-sanitize.min.js"></script>
+    <script src="scripts/angular-animate.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+    <!-- Controllers-->
+    <script src="app/global/module.js"></script>
+    <script src="app/global/util.js"></script>
+    <script src="app/veiculo/veiculoRepository.js"></script>
+
+    <script src="app/veiculo/veiculoController.js"></script>
+</body>
+</html>

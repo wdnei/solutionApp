@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="solutionAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="solutionAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Veiculo" EntityType="solutionAppModel.Veiculo" />
+    <EntitySet Name="Multa" EntityType="solutionAppModel.Multa" />
+    <AssociationSet Name="MultaVeiculo" Association="solutionAppModel.MultaVeiculo">
+      <End Role="Multa" EntitySet="Multa" />
+      <End Role="Veiculo" EntitySet="Veiculo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Veiculo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cor" Type="String" Nullable="false" />
+    <Property Name="modelo" Type="String" Nullable="false" />
+    <Property Name="placa" Type="String" Nullable="false" />
+    <NavigationProperty Name="Multa" Relationship="solutionAppModel.MultaVeiculo" FromRole="Veiculo" ToRole="Multa" />
+  </EntityType>
+  <EntityType Name="Multa">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pontos" Type="Int32" Nullable="false" />
+    <Property Name="descricao" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="MultaVeiculo">
+    <End Type="solutionAppModel.Multa" Role="Multa" Multiplicity="*" />
+    <End Type="solutionAppModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+  </Association>
+</Schema>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="solutionAppModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="solutionAppModelStoreContainer">
+    <EntitySet Name="Veiculo" EntityType="solutionAppModel.Store.Veiculo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Multa" EntityType="solutionAppModel.Store.Multa" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MultaVeiculo" EntityType="solutionAppModel.Store.MultaVeiculo" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_MultaVeiculo_Multa" Association="solutionAppModel.Store.FK_MultaVeiculo_Multa">
+      <End Role="Multa" EntitySet="Multa" />
+      <End Role="MultaVeiculo" EntitySet="MultaVeiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MultaVeiculo_Veiculo" Association="solutionAppModel.Store.FK_MultaVeiculo_Veiculo">
+      <End Role="Veiculo" EntitySet="Veiculo" />
+      <End Role="MultaVeiculo" EntitySet="MultaVeiculo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Veiculo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="modelo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="placa" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Multa">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pontos" Type="int" Nullable="false" />
+    <Property Name="descricao" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MultaVeiculo">
+    <Key>
+      <PropertyRef Name="Multa_id" />
+      <PropertyRef Name="MultaVeiculo_Multa_id" />
+    </Key>
+    <Property Name="Multa_id" Type="int" Nullable="false" />
+    <Property Name="MultaVeiculo_Multa_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_MultaVeiculo_Multa">
+    <End Role="Multa" Type="solutionAppModel.Store.Multa" Multiplicity="1" />
+    <End Role="MultaVeiculo" Type="solutionAppModel.Store.MultaVeiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Multa">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MultaVeiculo">
+        <PropertyRef Name="Multa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MultaVeiculo_Veiculo">
+    <End Role="MultaVeiculo" Type="solutionAppModel.Store.MultaVeiculo" Multiplicity="*" />
+    <End Role="Veiculo" Type="solutionAppModel.Store.Veiculo" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Veiculo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MultaVeiculo">
+        <PropertyRef Name="MultaVeiculo_Multa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

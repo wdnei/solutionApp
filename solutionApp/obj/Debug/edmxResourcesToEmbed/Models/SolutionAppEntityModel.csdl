@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SolutionAppContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SolutionAppContextEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Veiculo" EntityType="SolutionAppContextModel.Veiculo" />
+  </EntityContainer>
+  <EntityType Name="Veiculo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cor" Type="String" Nullable="false" />
+    <Property Name="modelo" Type="String" Nullable="false" />
+    <Property Name="placa" Type="String" Nullable="false" />
+  </EntityType>
+</Schema>
